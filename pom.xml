@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>debian-jdk8</name>
+    <name>openjdk8-jdk</name>
     <groupId>io.kghf.images</groupId>
-    <artifactId>debian-jdk8</artifactId>
+    <artifactId>openjdk8-jdk</artifactId>
     <version>${version.number}</version>
 
     <organization>
@@ -16,7 +16,7 @@
     <properties>
         <dockernocache>true</dockernocache>
         <imagename>
-            larskghf/debian-jdk8
+            larskghf/openjdk8-jdk
         </imagename>
         <imagepullpolicy>IfNotPresent</imagepullpolicy>
         <maven.deploy.skip>true</maven.deploy.skip>
