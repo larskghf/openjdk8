@@ -6,4 +6,6 @@ ARG JDKVERSION
 # update and upgrade os
 RUN \
     mkdir /opt/${JDKVERSION} && \
-    curl -L --silent https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u232b09.tar.gz | tar -xz --strip-components=1 -C "/opt/${JDKVERSION}"
+    curl -L --silent ${DOWNLOADURL} | tar -xz --strip-components=1 -C "/opt/${JDKVERSION}" && \
+    update-alternatives --install /usr/bin/java java /opt/${JDKVERSION}/bin/java 100 && \
+    update-alternatives --install /usr/bin/javac javac /opt/${JDKVERSION}/bin/javac 100
