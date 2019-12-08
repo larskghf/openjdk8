@@ -108,7 +108,6 @@
                     </images>
                     <imagePullPolicy>${imagepullpolicy}</imagePullPolicy>
                     <verbose>true</verbose>
-                    <docker.buildArg.DOWNLOADURL>${dlurl}</docker.buildArg.DOWNLOADURL>
                 </configuration>
             </plugin>
         </plugins>
