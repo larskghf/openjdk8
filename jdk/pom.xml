@@ -25,7 +25,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <timestamp>${maven.build.timestamp}</timestamp>
         <version.number>
-            ${JDKVERSION}.${git.commit.id.abbrev}
+            ${JDKVERSION}.${git.commit.id.describe-short}
         </version.number>
         <DOWNLOADURL>https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u232b09.tar.gz</DOWNLOADURL>
         <JDKVERSION>jdk8u232-b09</JDKVERSION>
