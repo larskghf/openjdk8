@@ -4,7 +4,6 @@ ARG DOWNLOADURL
 ARG JDKVERSION
 
 RUN apt-get update \
-    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
         apt-transport-https \
         ca-certificates \
