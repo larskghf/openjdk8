@@ -4,9 +4,9 @@ name: branch
 
 #only works in docker pipelines
 environment:
-  JAVAVERSION: 8u232-b09
-  DOWNLOADJDK: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u232b09.tar.gz
-  DOWNLOADJRE: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jre_x64_linux_hotspot_8u232b09.tar.gz
+  JAVAVERSION: 8u252-b09
+  DOWNLOADJDK: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u252b09.tar.gz
+  DOWNLOADJRE: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jre_x64_linux_hotspot_8u252b09.tar.gz
 
 steps:
   - name: createTags
@@ -43,9 +43,9 @@ name: buildPushJDK
 
 #only works in docker pipelines
 environment:
-  JAVAVERSION: 8u232-b09
-  DOWNLOADJDK: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u232b09.tar.gz
-  DOWNLOADJRE: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jre_x64_linux_hotspot_8u232b09.tar.gz
+  JAVAVERSION: 8u252-b09
+  DOWNLOADJDK: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u252b09.tar.gz
+  DOWNLOADJRE: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u252-b09/OpenJDK8U-jre_x64_linux_hotspot_8u252b09.tar.gz
 
 steps:
   - name: createTags
