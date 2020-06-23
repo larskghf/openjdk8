@@ -1,0 +1,80 @@
+kind: pipeline
+type: docker
+name: branch
+
+#only works in docker pipelines
+environment:
+  JAVAVERSION: 8u232-b09
+  DOWNLOADJDK: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u232b09.tar.gz
+  DOWNLOADJRE: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jre_x64_linux_hotspot_8u232b09.tar.gz
+
+steps:
+  - name: createTags
+    image: debian:buster-slim
+    commands:
+      - echo -n "$${JAVAVERSION}_${DRONE_COMMIT_SHA:0:8},latest" > .tags
+  - name: dockerBuildJDK
+    image: plugins/docker
+    settings:
+      repo: kghf/openjdk8-jdk
+      dockerfile: jdk/Dockerfile
+      dry_run: true
+      build_args_from_env:
+        - JAVAVERSION
+        - DOWNLOADJDK
+  - name: dockerBuildJRE
+    image: plugins/docker
+    settings:
+      repo: kghf/openjdk8-jre
+      dockerfile: jre/Dockerfile
+      dry_run: true
+      build_args_from_env:
+        - JAVAVERSION
+        - DOWNLOADJRE
+
+trigger:
+  branch:
+    - feature/*
+
+---
+kind: pipeline
+type: docker
+name: buildPushJDK
+
+#only works in docker pipelines
+environment:
+  JAVAVERSION: 8u232-b09
+  DOWNLOADJDK: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u232b09.tar.gz
+  DOWNLOADJRE: https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jre_x64_linux_hotspot_8u232b09.tar.gz
+
+steps:
+  - name: createTags
+    image: debian:buster-slim
+    commands:
+      - echo -n "$${JAVAVERSION}_${DRONE_COMMIT_SHA:0:8},latest" > .tags
+  - name: dockerBuildPushJDK
+    image: plugins/docker
+    settings:
+      repo: kghf/openjdk8-jdk
+      dockerfile: jdk/Dockerfile
+      username: larskghf
+      password:
+        from_secret: docker_password
+      build_args_from_env:
+        - JAVAVERSION
+        - DOWNLOADJDK
+  - name: dockerBuildPushJRE
+    image: plugins/docker
+    settings:
+      repo: kghf/openjdk8-jre
+      dockerfile: jre/Dockerfile
+      username: larskghf
+      password:
+        from_secret: docker_password
+      build_args_from_env:
+        - JAVAVERSION
+        - DOWNLOADJRE
+
+trigger:
+  branch:
+    - master
