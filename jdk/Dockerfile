@@ -1,7 +1,7 @@
 FROM debian:buster-slim as downloader
 
-ARG DOWNLOADURL
-ARG JDKVERSION
+ARG DOWNLOADJDK
+ARG JAVAVERSION
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -9,19 +9,19 @@ RUN apt-get update \
         ca-certificates \
         curl \
     && apt-get clean && apt-get autoremove && rm -Rf /var/lib/apt/lists/* && rm -Rf /var/cache/apt \
-    && mkdir /tmp/${JDKVERSION} \
-    && curl -L --silent ${DOWNLOADURL} | tar -xz --strip-components=1 -C "/tmp/${JDKVERSION}" \
-    && rm -rf /tmp/${JDKVERSION}/sample/ /tmp/${JDKVERSION}/src.zip
+    && mkdir /tmp/jdk${JAVAVERSION} \
+    && curl -L --silent ${DOWNLOADJDK} | tar -xz --strip-components=1 -C "/tmp/jdk${JAVAVERSION}" \
+    && rm -rf /tmp/jdk${JAVAVERSION}/sample/ /tmp/jdk${JAVAVERSION}/src.zip
 
 #-----------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------
 FROM debian:buster-slim
 
-ARG JDKVERSION
+ARG JAVAVERSION
 
-ENV JAVA_HOME /opt/${JDKVERSION}/
+ENV JAVA_HOME /opt/jdk${JAVAVERSION}/
 
-COPY --from=downloader /tmp/${JDKVERSION} /opt/${JDKVERSION}
+COPY --from=downloader /tmp/jdk${JAVAVERSION} /opt/jdk${JAVAVERSION}
 
-RUN update-alternatives --install /usr/bin/java java /opt/${JDKVERSION}/bin/java 100 \
-    && update-alternatives --install /usr/bin/javac javac /opt/${JDKVERSION}/bin/javac 100
+RUN update-alternatives --install /usr/bin/java java /opt/jdk${JAVAVERSION}/bin/java 100 \
+    && update-alternatives --install /usr/bin/javac javac /opt/jdk${JAVAVERSION}/bin/javac 100
