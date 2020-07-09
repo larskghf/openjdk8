@@ -63,7 +63,7 @@ steps:
       build_args_from_env:
         - JAVAVERSION
         - DOWNLOADJDK
-  - name: updateDockerReadme
+  - name: updateDockerReadmeJDK
     image: kghf/dockerhub-readme-updater:latest
     environment:
       DOCKER_REPO: kghf/openjdk8-jdk
@@ -81,7 +81,7 @@ steps:
       build_args_from_env:
         - JAVAVERSION
         - DOWNLOADJRE
-  - name: updateDockerReadme
+  - name: updateDockerReadmeJRE
     image: kghf/dockerhub-readme-updater:latest
     environment:
       DOCKER_REPO: kghf/openjdk8-jre
